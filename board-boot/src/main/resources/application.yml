@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: board
+      username: board
+      password: board
+
+logging:
+  level:
+    root: debug
+
+server:
+  port: 9001
