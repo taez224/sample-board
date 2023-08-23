@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    api(project(":board-domain"))
+    api(project(":board-entity"))
     api(project(":board-core"))
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-webflux")

@@ -1,12 +1,15 @@
 package com.sample.board.core.post.logic;
 
-import com.sample.board.domain.post.entity.Post;
-import com.sample.board.core.post.store.PostStore;
+import com.sample.board.core.post.dto.PostDetail;
+import com.sample.board.core.post.dto.PostList;
+import com.sample.board.core.post.dto.PostUpdate;
+import com.sample.board.entity.post.Post;
+import com.sample.board.entity.post.model.PostCdo;
+import com.sample.board.entity.post.store.PostStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
+import org.springframework.util.Assert;
 
 @Service
 @Transactional
@@ -15,29 +18,36 @@ public class PostLogic {
 
     private final PostStore postStore;
 
-    public void registerPost(Post post) {
+    public void registerPost(PostCdo cdo) {
         //
-        postStore.create(post);
+        postStore.create(Post.fromCdo(cdo));
     }
 
-    public List<Post> findAllPosts() {
+    public PostList findAllPosts() {
         //
-        return postStore.retrieveAll();
+        return PostList.fromEntities(postStore.retrieveAll());
     }
 
-    public Post findPostById(String id) {
+    public PostDetail findPostById(String id) {
         //
-        return postStore.retrieve(id);
+        return PostDetail.fromEntity(findPostByIdWithException(id));
     }
 
-    public Post modifyPost(Post post) {
+    public PostDetail modifyPost(String postId, PostUpdate postUpdate) {
         //
-        postStore.update(post);
-        return post;
+        Post targetPost = findPostByIdWithException(postId);
+        postStore.update(postUpdate.updatePost(targetPost));
+        return PostDetail.fromEntity(postStore.retrieve(postId));
     }
 
     public void deletePost(String id) {
         //
         postStore.delete(id);
+    }
+
+    private Post findPostByIdWithException(String postId) {
+        Post targetPost = postStore.retrieve(postId);
+        Assert.notNull(targetPost, "targetPost is null!");
+        return targetPost;
     }
 }

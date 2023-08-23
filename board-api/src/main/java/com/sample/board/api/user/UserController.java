@@ -3,7 +3,7 @@ package com.sample.board.api.user;
 import com.sample.board.api.common.BaseResponse;
 import com.sample.board.api.user.command.RegisterUserCommand;
 import com.sample.board.core.user.logic.UserLogic;
-import com.sample.board.domain.user.entity.User;
+import com.sample.board.entity.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;

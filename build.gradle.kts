@@ -13,7 +13,6 @@ allprojects {
 	version = "0.0.1-SNAPSHOT"
 }
 
-
 subprojects {
 	apply(plugin = "java-library")
 	apply(plugin = "io.spring.dependency-management")
@@ -32,6 +31,7 @@ subprojects {
 		testImplementation("io.projectreactor:reactor-test")
 		testImplementation("org.springframework.security:spring-security-test")
 	}
+
 	repositories {
 		mavenCentral()
 	}
@@ -39,6 +39,5 @@ subprojects {
 	tasks.withType<Test> {
 		useJUnitPlatform()
 	}
-
 
 }

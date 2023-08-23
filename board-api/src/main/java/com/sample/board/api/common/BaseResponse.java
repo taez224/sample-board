@@ -1,5 +1,6 @@
 package com.sample.board.api.common;
 
+import com.sample.board.api.common.exception.ErrorMessage;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;

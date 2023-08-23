@@ -1,7 +1,7 @@
 package com.sample.board.core.user.logic;
 
-import com.sample.board.core.user.store.UserStore;
-import com.sample.board.domain.user.entity.User;
+import com.sample.board.entity.user.store.UserStore;
+import com.sample.board.entity.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

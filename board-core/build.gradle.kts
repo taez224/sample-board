@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    api(project(":board-domain"))
+    api(project(":board-entity"))
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))

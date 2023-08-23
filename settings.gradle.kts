@@ -7,6 +7,6 @@ pluginManagement {
 }
 rootProject.name = "board"
 include("board-boot")
-include("board-domain")
+include("board-entity")
 include("board-api")
 include("board-core")
