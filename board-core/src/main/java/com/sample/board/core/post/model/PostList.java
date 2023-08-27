@@ -1,4 +1,4 @@
-package com.sample.board.core.post.dto;
+package com.sample.board.core.post.model;
 
 import com.sample.board.core.common.domain.DataTransferObject;
 import com.sample.board.entity.post.Post;

@@ -1,4 +1,4 @@
-package com.sample.board.core.post.dto;
+package com.sample.board.core.post.model;
 
 import com.sample.board.core.common.domain.BaseDomain;
 import com.sample.board.entity.post.Post;
@@ -22,6 +22,16 @@ public class PostDetail extends BaseDomain {
         PostDetail dto = new PostDetail();
         BeanUtils.copyProperties(post, dto);
         return dto;
+    }
+
+    public static PostDetail sample(String id) {
+        PostDetail sample =  new PostDetail(
+                "sample-writer",
+                "sample-title",
+                "sample-content"
+        );
+        sample.setId(id);
+        return sample;
     }
 
 }

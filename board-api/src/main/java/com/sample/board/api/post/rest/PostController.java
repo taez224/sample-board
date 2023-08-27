@@ -1,12 +1,13 @@
 package com.sample.board.api.post.rest;
 
-import com.sample.board.api.post.command.RegisterPostCommand;
+import com.sample.board.api.common.BaseResponse;
 import com.sample.board.api.post.PostApi;
-import com.sample.board.core.post.dto.PostDetail;
-import com.sample.board.core.post.dto.PostList;
-import com.sample.board.core.post.dto.PostUpdate;
+import com.sample.board.api.post.command.RegisterPostCommand;
 import com.sample.board.core.post.logic.PostLogic;
-import com.sample.board.entity.post.model.PostCdo;
+import com.sample.board.core.post.model.PostCdo;
+import com.sample.board.core.post.model.PostDetail;
+import com.sample.board.core.post.model.PostList;
+import com.sample.board.core.post.model.PostUpdate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,33 +19,36 @@ public class PostController implements PostApi {
     private final PostLogic postLogic;
 
     @Override
-    @GetMapping("/")
-    public PostList findAllPosts() {
-        return postLogic.findAllPosts();
+    @GetMapping("")
+    public BaseResponse<PostList> findAllPosts() {
+        return BaseResponse.of(postLogic.findAllPosts());
     }
 
     @Override
-    @PostMapping("/")
-    public void registerPost(@RequestBody RegisterPostCommand command) {
+    @PostMapping("")
+    public BaseResponse<String> registerPost(@RequestBody RegisterPostCommand command) {
         PostCdo cdo = command.getPostCdo();
         postLogic.registerPost(cdo);
+        return BaseResponse.created(cdo.getTitle());
     }
 
     @Override
     @GetMapping("/{postId}")
-    public PostDetail findPostById(@PathVariable String postId) {
-        return postLogic.findPostById(postId);
+    public BaseResponse<PostDetail> findPostById(@PathVariable String postId) {
+        return BaseResponse.of(postLogic.findPostById(postId));
     }
 
     @Override
     @PutMapping("/{postId}")
-    public void modifyPost(@PathVariable String postId, @RequestBody PostUpdate postUpdate) {
+    public BaseResponse<String> modifyPost(@PathVariable String postId, @RequestBody PostUpdate postUpdate) {
         postLogic.modifyPost(postId, postUpdate);
+        return BaseResponse.of(postId);
     }
 
     @Override
     @DeleteMapping("/{postId}")
-    public void deletePost(@PathVariable String postId) {
+    public BaseResponse<String> deletePost(@PathVariable String postId) {
         postLogic.deletePost(postId);
+        return BaseResponse.of(postId);
     }
 }

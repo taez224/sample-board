@@ -1,7 +1,7 @@
-package com.sample.board.api.post.command;
+package com.sample.board.api.comment.command;
 
 import com.sample.board.api.common.BaseRequest;
-import com.sample.board.core.post.model.PostCdo;
+import com.sample.board.core.comment.model.CommentCdo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterPostCommand extends BaseRequest {
+public class RegisterCommentCommand extends BaseRequest {
     //
-    private PostCdo postCdo;
+    private CommentCdo commentCdo;
 
 }

@@ -1,7 +1,6 @@
 package com.sample.board.entity.user;
 
 import com.sample.board.entity.common.BaseEntity;
-import com.sample.board.entity.user.model.UserCdo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,11 +18,4 @@ public class User extends BaseEntity {
     private String password;
     private String nickname;
 
-    public static User fromCdo(UserCdo userCdo) {
-        return new User(
-                userCdo.getLoginId(),
-                userCdo.getPassword(),
-                userCdo.getNickname()
-        );
-    }
 }

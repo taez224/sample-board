@@ -13,5 +13,5 @@ public interface PostStore {
     void update(Post post);
     void delete(Post post);
     void delete(String id);
-
+    boolean exist(String id);
 }

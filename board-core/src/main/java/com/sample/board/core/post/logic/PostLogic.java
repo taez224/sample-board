@@ -1,10 +1,10 @@
 package com.sample.board.core.post.logic;
 
-import com.sample.board.core.post.dto.PostDetail;
-import com.sample.board.core.post.dto.PostList;
-import com.sample.board.core.post.dto.PostUpdate;
+import com.sample.board.core.post.model.PostCdo;
+import com.sample.board.core.post.model.PostDetail;
+import com.sample.board.core.post.model.PostList;
+import com.sample.board.core.post.model.PostUpdate;
 import com.sample.board.entity.post.Post;
-import com.sample.board.entity.post.model.PostCdo;
 import com.sample.board.entity.post.store.PostStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,10 +17,9 @@ import org.springframework.util.Assert;
 public class PostLogic {
 
     private final PostStore postStore;
-
     public void registerPost(PostCdo cdo) {
         //
-        postStore.create(Post.fromCdo(cdo));
+        postStore.create(cdo.toEntity());
     }
 
     public PostList findAllPosts() {
@@ -33,21 +32,25 @@ public class PostLogic {
         return PostDetail.fromEntity(findPostByIdWithException(id));
     }
 
-    public PostDetail modifyPost(String postId, PostUpdate postUpdate) {
+    public void modifyPost(String postId, PostUpdate postUpdate) {
         //
         Post targetPost = findPostByIdWithException(postId);
         postStore.update(postUpdate.updatePost(targetPost));
-        return PostDetail.fromEntity(postStore.retrieve(postId));
     }
 
     public void deletePost(String id) {
         //
-        postStore.delete(id);
+        Post targetPost = findPostByIdWithException(id);
+        postStore.delete(targetPost);
+    }
+
+    public boolean existByPostId(String postId) {
+        return postStore.exist(postId);
     }
 
     private Post findPostByIdWithException(String postId) {
         Post targetPost = postStore.retrieve(postId);
-        Assert.notNull(targetPost, "targetPost is null!");
+        Assert.notNull(targetPost, "Post not found!");
         return targetPost;
     }
 }

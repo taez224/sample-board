@@ -1,5 +1,6 @@
 package com.sample.board.core.user.logic;
 
+import com.sample.board.core.user.model.UserCdo;
 import com.sample.board.entity.user.store.UserStore;
 import com.sample.board.entity.user.User;
 import lombok.RequiredArgsConstructor;
@@ -14,11 +15,11 @@ public class UserLogic {
 
     private final UserStore userStore;
 
-    public String registerUser(User user) {
+    public String registerUser(UserCdo cdo) {
         //
-        Assert.isTrue(!userStore.exists(user.getLoginId()), "User already exists with id: " + user.getLoginId());
-        userStore.create(user);
-        return user.getLoginId();
+        Assert.isTrue(!userStore.exists(cdo.getLoginId()), "User already exists with id: " + cdo.getLoginId());
+        userStore.create(cdo.toEntity());
+        return cdo.getLoginId();
     }
 
     public User findUserById(String userId) {

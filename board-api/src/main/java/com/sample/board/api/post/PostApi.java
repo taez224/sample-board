@@ -1,19 +1,20 @@
 package com.sample.board.api.post;
 
+import com.sample.board.api.common.BaseResponse;
 import com.sample.board.api.post.command.RegisterPostCommand;
-import com.sample.board.core.post.dto.PostDetail;
-import com.sample.board.core.post.dto.PostList;
-import com.sample.board.core.post.dto.PostUpdate;
+import com.sample.board.core.post.model.PostDetail;
+import com.sample.board.core.post.model.PostList;
+import com.sample.board.core.post.model.PostUpdate;
 
 public interface PostApi {
 
-    PostList findAllPosts();
+    BaseResponse<PostList> findAllPosts();
 
-    void registerPost(RegisterPostCommand cdo);
+    BaseResponse<String> registerPost(RegisterPostCommand command);
 
-    PostDetail findPostById(String postId);
+    BaseResponse<PostDetail> findPostById(String postId);
 
-    void modifyPost(String postId, PostUpdate postUpdate);
+    BaseResponse<String> modifyPost(String postId, PostUpdate postUpdate);
 
-    void deletePost(String postId);
+    BaseResponse<String> deletePost(String postId);
 }

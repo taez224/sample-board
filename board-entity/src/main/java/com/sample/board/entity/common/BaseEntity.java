@@ -24,13 +24,13 @@ public abstract class BaseEntity {
     @Version
     private Long version;
 
-    public BaseEntity() {
+    protected BaseEntity() {
 
         this.id = UUID.randomUUID().toString();
         this.createdAt = LocalDateTime.now();
     }
 
-    public BaseEntity(String id) {
+    protected BaseEntity(String id) {
         this.id = id;
         this.createdAt = LocalDateTime.now();
     }

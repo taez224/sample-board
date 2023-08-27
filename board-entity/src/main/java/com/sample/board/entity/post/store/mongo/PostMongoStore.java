@@ -1,13 +1,12 @@
 package com.sample.board.entity.post.store.mongo;
 
-import com.sample.board.entity.post.store.mongo.repository.PostMongoRepository;
 import com.sample.board.entity.post.Post;
 import com.sample.board.entity.post.store.PostStore;
+import com.sample.board.entity.post.store.mongo.repository.PostMongoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -22,8 +21,7 @@ public class PostMongoStore implements PostStore {
 
     @Override
     public Post retrieve(String id) {
-        Optional<Post> post = postMongoRepository.findById(id);
-        return post.orElse(null);
+        return  postMongoRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -38,7 +36,7 @@ public class PostMongoStore implements PostStore {
 
     @Override
     public void delete(Post post) {
-        postMongoRepository.deleteById(post.getId());
+        postMongoRepository.delete(post);
     }
 
     @Override
@@ -46,6 +44,7 @@ public class PostMongoStore implements PostStore {
         postMongoRepository.deleteById(id);
     }
 
-
+    @Override
+    public boolean exist(String id) { return postMongoRepository.existsById(id); }
 
 }

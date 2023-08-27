@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
+import org.springframework.web.server.ResponseStatusException;
 
 @Getter
 @Setter
@@ -31,9 +32,22 @@ public class BaseResponse<T> extends ResponseEntity<T> {
         };
     }
 
+    public static BaseResponse<ErrorMessage> fail(ResponseStatusException e) {
+        ErrorMessage errorMessage = ErrorMessage.fromException(e);
+        return new BaseResponse<>(e.getStatusCode(), errorMessage);
+    }
+
     public static BaseResponse<ErrorMessage> fail(Exception e) {
         ErrorMessage errorMessage = ErrorMessage.fromException(e);
         return new BaseResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage);
+    }
+
+    public static <T> BaseResponse<T> of(T body) {
+        return new BaseResponse<>(HttpStatus.OK, body);
+    }
+
+    public static <T> BaseResponse<T> created(T body) {
+        return new BaseResponse<>(HttpStatus.CREATED, body);
     }
 
     public interface BaseBodyBuilder {
